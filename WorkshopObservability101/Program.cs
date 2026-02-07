@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
@@ -8,7 +6,6 @@ app.MapPost("/checkout", async (CheckoutRequest request) =>
     // Simulate external payment provider latency
     await CallPaymentProviderAsync(request.CardNumber);
 
-    // BUG: assumes card number has at least 4 digits
     var lastFour = request.CardNumber.Substring(request.CardNumber.Length - 4);
 
     return Results.Ok(new
